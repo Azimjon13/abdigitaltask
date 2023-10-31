@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('App\Http\Controllers')->group(function() {
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+        Route::get('/user/posts', 'PostController@posts_by_user');
+
+        Route::resource('posts', PostController::class);
+
+    });
 });

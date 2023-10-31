@@ -24,6 +24,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('posts', 'PostController@index')->name('posts');
+Route::get('posts/{id}', 'PostController@show')->whereNumber('id')->name('posts.show');
+
+//Route::resource('posts', PostController::class)->middleware('auth:sanctum');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

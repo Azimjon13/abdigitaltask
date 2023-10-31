@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\PostExcludedUserResource;
 use App\Http\Resources\PostResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,13 +15,13 @@ class Post extends Model
     protected $fillable = [
         'photo', 'title', 'body', 'user_id'
     ];
+    //protected $guarded = ['id'];
 
     public function author(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function toResource()
-    {
+    public function toResource(){
         return new PostResource($this);
     }
 }
