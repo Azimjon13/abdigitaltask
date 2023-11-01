@@ -21,7 +21,8 @@ Route::namespace('App\Http\Controllers')->group(function() {
         });
         Route::get('/user/posts', 'PostController@posts_by_user');
 
-        Route::resource('posts', PostController::class);
+        Route::apiResource('posts', PostController::class);
+        Route::post('/posts/{id}', 'PostController@update_photo')->whereAlphaNumeric('id');
 
     });
 });

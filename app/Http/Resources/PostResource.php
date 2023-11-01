@@ -18,7 +18,8 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'photo' => $this->photo,
+            'photo' => asset('storage/'.$this->photo),
+            'title' => $this->title,
             'body' => $this->body,
             'author' => new UserResource($this->author),
             'created_at' => $this->created_at->diffForHumans(),

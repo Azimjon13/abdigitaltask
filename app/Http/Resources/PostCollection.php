@@ -12,13 +12,9 @@ class PostCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public function toArray(Request $request): array
-    {
-        return [
-            'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
-        ];
+
+    public function toArray($request){
+        return $this->resource;
     }
+
 }

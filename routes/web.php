@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,14 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('telegrambot', function (){
+    return Telegram::bot('abdigitalbot')->getMe();
+})->name('telegrambot');
+
+Route::post('telegrambot/'.env('TELEGRAM_BOT_TOKEN').'/webhook', function (){
+    return Telegram::bot('abdigitalbot')->getMe();
+})->name('weebhook');
 
 Route::get('posts', 'PostController@index')->name('posts');
 Route::get('posts/{id}', 'PostController@show')->whereNumber('id')->name('posts.show');
