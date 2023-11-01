@@ -25,7 +25,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            $this->sendTelegramMessage($e);
         });
     }
 
@@ -34,15 +34,8 @@ class Handler extends ExceptionHandler
         try {
 
             $content['message'] = $exception->getMessage();
-            $content['file'] = $exception->getFile();
-            $content['line'] = $exception->getLine();
-            $content['trace'] = $exception->getTrace();
 
-            $content['url'] = request()->url();
-            $content['body'] = request()->all();
-            $content['ip'] = request()->ip();
-
-            BotController::sendMessage('', $content);
+            BotController::sendMessage('-1001995750232', $content);
 
         } catch (Throwable $exception) {
             Log::error($exception);
