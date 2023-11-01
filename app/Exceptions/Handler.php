@@ -34,7 +34,6 @@ class Handler extends ExceptionHandler
         try {
 
             $content['message'] = $exception->getMessage();
-
             BotController::sendMessage('-1001995750232', $content);
 
         } catch (Throwable $exception) {
