@@ -25,6 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('throwable', function (){
+    return throw new \ErrorException('Error found');
+})->name('throwable');
+
 Route::get('telegrambot', function (){
     return Telegram::bot('abdigitalbot')->getMe();
 })->name('telegrambot');

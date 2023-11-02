@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Http\Controllers\BotController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class Handler extends ExceptionHandler
 {
@@ -29,15 +30,21 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function sendTelegramMessage(Throwable $exception)
+
+    public function sendTelegramMessage(Throwable $e)
     {
         try {
 
-            $content['message'] = $exception->getMessage();
-            BotController::sendMessage('-1001995750232', $content);
+            $content = $e->getMessage();
+            Telegram::sendMessage([
+                'chat_id' => '-1001995750232',
+                'parse_mode' => 'HTML',
+                'text' => $content
+            ]);
+            //BotController::sendMessage('-1001995750232', $content);
 
-        } catch (Throwable $exception) {
-            Log::error($exception);
+        } catch (Throwable $e) {
+            Log::error($e);
         }
     }
 }

@@ -19,6 +19,7 @@ class BotController extends Controller
     }
 
     public function sendMessage($chat_id, $content){
+
         $this->telegram->sendMessage([
             'chat_id' => $chat_id,
             'text' => $content

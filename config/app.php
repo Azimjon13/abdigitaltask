@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
     ])->toArray(),
 
     /*
